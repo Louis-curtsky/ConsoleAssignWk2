@@ -40,7 +40,6 @@ namespace ConsoleAssignWk2
                 }
                 else
                 {
-
                     guessBychar = false;
                     complete = GuessByWord(complete, storeWord, secretChar);
                 }
@@ -48,10 +47,7 @@ namespace ConsoleAssignWk2
                 userword = AskUserAword("Enter next guest:");
                 storeWord = userword.ToCharArray();
                 UpperCaseText(storeWord);
-                if (!complete)
-                {
-                    Console.WriteLine($"You have {10 - count} to guess!!!");
-                }
+                Console.WriteLine($"You have {10 - count} to guess!!!");
             }// end of DO
             while (count < 10 && !complete);
             Console.WriteLine($"The correct animal is {secretWord} and you had made {count} guess!!!");
@@ -78,10 +74,17 @@ namespace ConsoleAssignWk2
             int numRight = 0;
 
             //            Console.WriteLine("Guess By Word");
-        for (int i= 0; i<secretChar.Length; i++)
+            if (storeWord.Length == secretChar.Length)
             {
-                if (storeWord[i] == secretChar[i])
-                    numRight++;
+                for (int i = 0; i < secretChar.Length; i++)
+                {
+                    if (storeWord[i] == secretChar[i])
+                        numRight++;
+                }
+            }
+            else
+            {
+                complete = false;
             }
             if (numRight == secretChar.Length && storeWord.Length == secretChar.Length)
                 complete = true;
@@ -91,28 +94,38 @@ namespace ConsoleAssignWk2
         }
 
         private static bool GuessByLetter(bool complete, char [] storeWord, char[] secretChar, char[] displayGus, int count)
-        {           
-            
-                for (int i=0; i<secretChar.Length; i++)
+        {
+            int numRight = 0;
+            bool inPutBefore = false;
+       
+            for (int i=0; i<secretChar.Length; i++)
+            {
+                if (storeWord[0] == displayGus[i])
+                {
+                    inPutBefore = true;
+                }
+            }
+            if (!inPutBefore)
+            {
+                for (int i = 0; i < secretChar.Length; i++)
                 {
                     if (storeWord[0] == secretChar[i])
                     {
                         displayGus[i] = storeWord[0];
                     }
                 }
+
                 for (int i = 0; i < secretChar.Length; i++)
                 {
-                    if (displayGus[i] == '-')
+                    if (displayGus[i] == secretChar[i])
                     {
-                        complete = false;
+                        numRight++;
                     }
-                    else
-                    {
-                        complete = true;
+                }
+            }
+            if (numRight == secretChar.Length)
+                complete = true;
 
-                    }
-//                Console.WriteLine($"complete:{complete} count is {count} stored{storeWord}");
-            }// End While
             Console.WriteLine(displayGus);
             return complete;
         } // End of GuessALetter
