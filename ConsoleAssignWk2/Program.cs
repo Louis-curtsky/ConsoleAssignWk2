@@ -121,11 +121,11 @@ namespace ConsoleAssignWk2
                         numRight++;
                     }
                 }
+            Console.WriteLine(displayGus);
             }
             if (numRight == secretChar.Length)
                 complete = true;
 
-            Console.WriteLine(displayGus);
             return complete;
         } // End of GuessALetter
 
