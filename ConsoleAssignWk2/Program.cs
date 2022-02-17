@@ -14,8 +14,8 @@ namespace ConsoleAssignWk2
             bool guessBychar = false;
             int index = position.Next(0,6);
             int count = 0;
-//            string storeWord = "";
-            string secretWord = "BOARS";
+            string secretWord = FromArray(index);
+//            Console.WriteLine("New guess is "+FromArray(index));
             char[] secretChar = secretWord.ToCharArray();
             UpperCaseText(secretChar);
             string userword = AskUserAword("Enter your guess: ");
