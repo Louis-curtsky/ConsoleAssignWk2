@@ -93,29 +93,24 @@ namespace ConsoleAssignWk2
         {
             int numRight = 0;
             bool inPutBefore = false;
-            bool wrongGuess = false; 
+            bool wrongGuess = true; 
        
      
             for (int i=0; i<userWrongLtr.Length; i++)
             {
                 if (storeWord[0] == userWrongLtr[i])
-                {
                     inPutBefore = true;
-                }
 
             } 
 
-            if (!inPutBefore)
+            if (inPutBefore==false)
             {
                 for (int i = 0; i < secretChar.Length; i++)
                 {
                     if (storeWord[0] == secretChar[i])
                     {
                         displayGus[i] = storeWord[0];
-                    }
-                    else
-                    {
-                        wrongGuess = true;
+                        wrongGuess = false;
                     }
                 }
 
@@ -124,17 +119,18 @@ namespace ConsoleAssignWk2
                     if (displayGus[i] == secretChar[i])
                     {
                         numRight++;
+ //                       Console.WriteLine($"Secret Char is {secretChar[i]}");
                     }
                 }
-                if (wrongGuess == true && !inPutBefore)
+            }
+                if (wrongGuess==true && inPutBefore==false)
                 {
-                    userWrongLtr.Append(storeWord);
+                    userWrongLtr.Append(storeWord[0]);
                     userWrongLtr.Append(',');
                 }
                 Console.WriteLine(displayGus);
                 Console.WriteLine(userWrongLtr);
-            }
-
+//            Console.WriteLine(storeWord);
             if (numRight == secretChar.Length)
                 complete = true;
 
