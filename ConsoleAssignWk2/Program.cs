@@ -2,7 +2,15 @@
 using System.Collections.Generic;//need this to use List
 using System.Text;
 using System.Linq;
-
+/*
+ * Hangman game
+ * User input a letter or a word and system will decide the user is play by a letter or by word
+ * User has 10 tries to guess
+ * For guess by letter, every right letter will be appear in the secret word in the rigjt position
+ * For those not been guess or not been guess correctly will be show as "-"
+ * Repeat guess of letter will not be consume
+ * Louis Lim - Feb 2022
+ */
 namespace ConsoleAssignWk2
 {
     class Program
@@ -24,8 +32,6 @@ namespace ConsoleAssignWk2
             Array.Fill(displayGus, '-');
             UpperCaseText(storeWord);
 
-            //           string secretWord = FromArray(index);
-            //            userword = AskUserAword("Enter a Word:");
             if (storeWord.Length == 1)
             {
                 guessBychar = true;
@@ -35,7 +41,7 @@ namespace ConsoleAssignWk2
             {
                 if (guessBychar)
                 {
-                    //                  Console.WriteLine("Guess by letter");
+
                     complete = GuessByLetter(complete, storeWord, secretChar, displayGus, count);
                 }
                 else
@@ -63,17 +69,11 @@ namespace ConsoleAssignWk2
                 secretChar[i] = temp[i];
             }
         }
-/*
-        private static void MoveToCharArray(string inputedWord)
-        {
-            StringBuilder wordToGuess = new StringBuilder(inputedWord);
-        }
-*/
+// End Upper Case Text Method
         private static bool GuessByWord(bool complete, char[] storeWord, char[] secretChar)
         {
             int numRight = 0;
 
-            //            Console.WriteLine("Guess By Word");
             if (storeWord.Length == secretChar.Length)
             {
                 for (int i = 0; i < secretChar.Length; i++)
@@ -89,10 +89,9 @@ namespace ConsoleAssignWk2
             if (numRight == secretChar.Length && storeWord.Length == secretChar.Length)
                 complete = true;
                     
-//            Console.WriteLine($"{userword} and {secretWord} and {complete}");
             return complete;
         }
-
+// End of Guess By Word Method
         private static bool GuessByLetter(bool complete, char [] storeWord, char[] secretChar, char[] displayGus, int count)
         {
             int numRight = 0;
