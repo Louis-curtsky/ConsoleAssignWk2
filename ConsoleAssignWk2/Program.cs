@@ -20,6 +20,7 @@ namespace ConsoleAssignWk2
             Random position = new Random();
             bool complete = false;
             bool guessBychar = false;
+            bool notCount = false;
             int index = position.Next(0,6);
 //            int index = 1;
             int count = 1;
@@ -31,7 +32,7 @@ namespace ConsoleAssignWk2
             char[] storeWord = userword.ToCharArray();
             char[] displayGus = secretWord.ToCharArray();
             StringBuilder userWrongLtr = new StringBuilder();
-            userWrongLtr.Append("Wrong Guess: ");
+
 
             Array.Fill(displayGus, '_');
             UpperCaseText(storeWord);
@@ -51,15 +52,23 @@ namespace ConsoleAssignWk2
                 if (guessBychar)
                 {
                     complete = GuessByLetter(complete, storeWord, secretChar, displayGus, userWrongLtr);
+                    for (int i = 0; i < userWrongLtr.Length; i++)
+                    {
+                        if (storeWord[0] == userWrongLtr[i])
+                        {
+                            notCount = true;
+                        }
+                    }
+                    if (notCount == false)
+                        ++count;
                 }
                 else
                 {
                     complete = GuessByWord(complete, secretWord, userword);
- //                   Console.WriteLine("GBW");
+                    ++count;
                 }
-
+                notCount = false;
                 Console.WriteLine($"You have {10-count} left to guess!!!");
-                ++count;
                 if (!complete)
                 {
                     userword = AskUserAword("Enter next guest:");
@@ -129,8 +138,8 @@ namespace ConsoleAssignWk2
                     userWrongLtr.Append(',');
                 }
                 Console.WriteLine(displayGus);
-                Console.WriteLine(userWrongLtr);
-//            Console.WriteLine(storeWord);
+                Console.WriteLine("Wrong Guesses: "+userWrongLtr);
+ //               Console.WriteLine(storeWord);
             if (numRight == secretChar.Length)
                 complete = true;
 
